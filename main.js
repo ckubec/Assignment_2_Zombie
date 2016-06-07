@@ -11,7 +11,7 @@ function Circle(game) {
     this.player = 1;
     this.radius = 10;
     this.visualRadius = 500;
-    this.colors = ["Red", "Green", "Blue", "White", "Black"];
+    this.colors = ["White", "Red", "Green", "Blue", "Black"];
     this.setNotIt();
     Entity.call(this, game, this.radius + Math.random() * (800 - this.radius * 2), this.radius + Math.random() * (800 - this.radius * 2));
 
@@ -32,15 +32,19 @@ Circle.prototype.setIt = function (level) {
         this.color = this.color + level;
     } else {
         this.it = true;
-        this.color = 0;
+        this.color = 1;
         this.visualRadius = 500;
+    }
+
+    if(this.color === 4) {
+        this.setNotIt();
     }
 
 };
 
 Circle.prototype.setNotIt = function () {
     this.it = false;
-    this.color = 3;
+    this.color = 0;
     this.visualRadius = 200;
 };
 
@@ -177,8 +181,6 @@ var maxSpeed = 200;
 
 var ASSET_MANAGER = new AssetManager();
 
-//ASSET_MANAGER.queueDownload("./img/960px-Blank_Go_board.png");
-//ASSET_MANAGER.queueDownload("./img/black.png");
 ASSET_MANAGER.queueDownload("./img/white.png");
 
 ASSET_MANAGER.downloadAll(function () {
