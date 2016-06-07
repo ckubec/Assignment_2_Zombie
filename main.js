@@ -11,7 +11,7 @@ function Circle(game) {
     this.player = 1;
     this.radius = 10;
     this.visualRadius = 500;
-    this.colors = ["White", "Red", "Green", "Blue", "Black"];
+    this.colors = ["White", "Red", "Green", "Blue", "Black", "Purple"];
     this.setNotIt();
     Entity.call(this, game, this.radius + Math.random() * (800 - this.radius * 2), this.radius + Math.random() * (800 - this.radius * 2));
 
@@ -36,9 +36,9 @@ Circle.prototype.setIt = function (level) {
         this.visualRadius = 500;
     }
 
-    if(this.color === 4) {
+    /*if(this.color === 4) {
         this.setNotIt();
-    }
+    }*/
 
 };
 
@@ -167,7 +167,7 @@ Circle.prototype.update = function () {
         for(i = 0; i<this.game.entities.length; i++) {
             this.game.entities[i].setNotIt();
         }
-        this.game.entities[Math.floor(Math.random() * this.game.entities.length-1)].setIt();
+        this.game.entities[Math.floor(Math.random() * (this.game.entities.length-1))].setIt();
     }
     count = 0;
     
