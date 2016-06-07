@@ -118,11 +118,11 @@ Circle.prototype.update = function () {
                 //this.setNotIt();
                 //this.velocity
                 ent.setIt();
-                this.setIt(1);
+                //this.setIt(1);
             }
             else if (ent.it) {
                 this.setIt();
-                ent.setIt(1);
+                //ent.setIt(1);
                // ent.setNotIt();
             }
         }
@@ -154,13 +154,28 @@ Circle.prototype.update = function () {
                 }
             }
         }
+        if(this.game.entities[i].it === true) {
+            count++;
+        }
     }
-    
+
+    if(count === this.game.entities.length) {
+        cycles += 1;
+        console.log("everyone died: " + cycles);
+        deathUpdate(cycles);
+        
+        for(i = 0; i<this.game.entities.length; i++) {
+            this.game.entities[i].setNotIt();
+        }
+        this.game.entities[Math.floor(Math.random() * this.game.entities.length-1)].setIt();
+    }
+    count = 0;
     
 
 
     this.velocity.x -= (1 - friction) * this.game.clockTick * this.velocity.x;
     this.velocity.y -= (1 - friction) * this.game.clockTick * this.velocity.y;
+
 };
 
 Circle.prototype.draw = function (ctx) {
@@ -178,6 +193,8 @@ Circle.prototype.draw = function (ctx) {
 var friction = 1;
 var acceleration = 1000000;
 var maxSpeed = 200;
+var cycles = 0;
+var count = 0;
 
 var ASSET_MANAGER = new AssetManager();
 
